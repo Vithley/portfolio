@@ -1,0 +1,183 @@
+
+.adventure-wrapper {
+  width: 80vw; // o el tamaño que desees (por ejemplo: 80vw para más marco)
+  aspect-ratio: 16 / 9;
+  margin: auto;
+  margin-top: 2vh; // pequeño margen superior opcional
+  position: relative;
+  overflow: hidden;
+}
+
+
+.adventure-scene {
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/doot-room-1.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+  cursor: url('/assets/cursor/pointer.cur'), auto;
+}
+
+/* Hotspot del ordenador */
+.hotspot-computer {
+  position: absolute;
+  top: 40.5%;
+  left: 34.6%;
+  width: 9%;
+  height: 15%;
+  cursor: pointer;
+  z-index: 5;
+
+  .glow-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(57, 255, 20, 0.0);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 transparent;
+  }
+
+  .glow-overlay.active {
+    background: rgba(57, 255, 20, 0.25);
+    box-shadow: 0 0 12px 4px rgba(57, 255, 20, 0.6);
+    border: 2px solid rgba(57, 255, 20, 0.5);
+  }
+
+  .tooltip {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #39ff14;
+    font-size: 0.6rem;
+    padding: 4px 6px;
+    border-radius: 3px;
+    font-family: 'Press Start 2P', monospace;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  &:hover .tooltip {
+    opacity: 1;
+  }
+}
+
+/* Hotspots generales */
+.hotspot {
+  position: absolute;
+  width: 7%;
+  height: 11%;
+  cursor: pointer;
+  z-index: 5;
+
+  .tooltip {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    font-size: 0.6rem;
+    padding: 4px 6px;
+    border-radius: 3px;
+    font-family: 'Press Start 2P', monospace;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  &:hover .tooltip {
+    opacity: 1;
+  }
+}
+
+/* Hotspot sobre el tentáculo (círculo verde animado) */
+.mutant-hotspot {
+  top: 51%;         // ← NUEVO
+  left: 75%;        // ← NUEVO
+  width: 8%;
+  height: 14%;      // ← Opcional si también lo ajustaste visualmente
+
+  .glow-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 255, 155, 0.0);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 transparent;
+    animation: glowPulse 2s infinite ease-in-out;
+  }
+
+  .glow-overlay.active {
+    background: rgba(0, 255, 155, 0.3);
+    box-shadow: 0 0 14px 5px rgba(0, 255, 155, 0.7);
+    border: 2px solid rgba(0, 255, 155, 0.5);
+  }
+
+  .hotspot-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem;
+    color: #00ff9c;
+  }
+
+  .tooltip {
+    color: #00ff9c;
+  }
+}
+
+.dialog-box {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #39ff14;
+  padding: 1rem 1.5rem;
+  border: 2px solid #39ff14;
+  border-radius: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  z-index: 10;
+  max-width: 80%;
+  text-align: center;
+  animation: fadeInOut 2.5s ease-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+
+/* Efecto glow */
+@keyframes glowPulse {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.8);
+  }
+}

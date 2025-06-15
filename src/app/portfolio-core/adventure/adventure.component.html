@@ -1,0 +1,32 @@
+<!-- adventure.component.html -->
+<div class="adventure-wrapper">
+  <div class="adventure-scene" data-aos="zoom-in">
+    <div class="dialog-box" *ngIf="dialogText">
+      <p>{{ dialogText }}</p>
+    </div>
+
+    <div
+      class="hotspot-computer"
+      (click)="openProject('terminal')"
+      (mouseenter)="hoverComputer = true"
+      (mouseleave)="hoverComputer = false"
+    >
+      <div class="glow-overlay" [class.active]="hoverComputer"></div>
+      <span class="tooltip">💻 Consola Angular</span>
+    </div>
+
+    <div
+    class="hotspot mutant-hotspot"
+    style="top: 50%; left: 71%;"
+    (click)="openProject('tentaculo')"
+    (mouseenter)="hoverMutant = true"
+    (mouseleave)="hoverMutant = false"
+    data-aos="fade-up"
+    data-aos-delay="600"
+    >
+    <div class="glow-overlay" [class.active]="hoverMutant"></div>
+        <span class="tooltip">🧪 Proyecto mutante</span>
+    </div>
+
+  </div>
+</div>

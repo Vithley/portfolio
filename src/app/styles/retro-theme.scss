@@ -1,0 +1,17 @@
+:root {
+  --bg-left: #4a3c80;
+  --bg-right: #2f2a5a;
+  --green-pixel: #72ff72;
+  --pink-pixel: #ff9dd2;
+  --pixel-font: 'Press Start 2P', cursive;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--pixel-font);
+  background: black;
+  color: #fff;
+  overflow: hidden;
+}

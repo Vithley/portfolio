@@ -1,0 +1,33 @@
+.nav {
+  font-family: 'Press Start 2P', monospace;
+  background-color: #000;
+  border-bottom: 3px double #ccb8ff;
+  padding: 10px 20px;
+}
+
+.nav-link {
+  color: #ccb8ff;
+  text-shadow: 1px 1px #000;
+  padding: 8px 10px;
+  border: 2px solid transparent;
+  font-size: 0.7rem;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #ccb8ff;
+  color: #000;
+  border-color: #ccb8ff;
+  box-shadow: 2px 2px #222;
+}
+
+.nav-link.active {
+  background-color: #222;
+  color: #ccb8ff;
+  border: 2px solid #ccb8ff;
+}
+
+.nav-link.disabled {
+  color: #555;
+  pointer-events: none;
+}

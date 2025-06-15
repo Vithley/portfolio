@@ -1,0 +1,112 @@
+// Colors
+$red: #ed1c24;
+$orange: #f7931e;
+$yellow: #ffd73c;
+$green: #43A047;
+$blue: #00477a;
+$lightblue: #afc6e4;
+
+// Blackscale
+$black-1: #505050;
+$black-2: #323232;
+$black-3: #414141;
+$black-4: #646464;
+$black-5: #5a5a5a;
+$black-6: #828282;
+
+// Grayscale
+$gray-1: #f2f2f2;
+$gray-2: #c8c8c8;
+$gray-3: #969696;
+$gray-4: #e6e6e6;
+
+$grays: (
+  "1": $gray-1,
+  "2": $gray-2,
+  "3": $gray-3,
+  "4": $gray-4,
+);
+
+// Primary
+$original: #25346A;
+$highlight: #5A6FB2;
+$active: #786e82;
+
+$link-color: rgb(0, 115, 187);
+
+$component-active-bg: $original;
+
+$sizes: (
+  sp: 144px,
+);
+
+$yiq-text-dark: $black-1;
+$yiq-text-light: $gray-4;
+
+$body-bg: $gray-1;
+$body-color: $black-1;
+
+$mark-bg: rgba($highlight, 0.25);
+
+$dropdown-bg: $gray-4;
+$dropdown-border-color: none;
+$dropdown-border-width: 0;
+
+
+$enable-rounded: true;
+$enable-shadows: true;
+
+$header-height: 50px;
+
+$theme-colors: (
+  "primary": $original,
+  "secondary": $gray-1,
+  "success": $green,
+  "info": $lightblue,
+  "danger": $red,
+  "warning": $orange,
+);
+
+$component-active-bg: $black-2 !default;
+
+$custom-control-indicator-checked-bg: $original;
+$custom-control-indicator-box-shadow: null;
+$custom-control-indicator-checked-border-color: $original;
+$custom-checkbox-indicator-border-radius: 2px;
+$custom-control-indicator-checked-color: $gray-1;
+
+$breadcrumb-bg: transparent;
+$breadcrumb-divider-color: $gray-2;
+$breadcrumb-active-color: $highlight;
+
+
+$btn-box-shadow: none;
+$btn-padding-x: 1.5rem;
+$border-radius: 2px;
+$input-bg: white;
+$input-box-shadow: null;
+$input-btn-focus-box-shadow: null;
+$input-border-radius: 2px;
+$input-btn-padding-y: 0.25rem;
+
+// General
+$border-color: $gray-2;
+$table-hover-bg: rgba($highlight, .2);
+
+// Cards
+$card-border-width: 0;
+
+// List groups
+$list-group-border-radius: 0;
+$list-group-color: $black-3;
+$list-group-active-color: $black-3;
+
+$list-group-bg: $gray-1;
+$list-group-active-bg: $gray-4;
+$list-group-hover-bg: $gray-4;
+$list-group-action-active-bg: $gray-4;
+$list-group-active-border-color: $gray-2;
+
+$grid-gutter-width: 20px;
+
+

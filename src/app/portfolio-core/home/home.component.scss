@@ -1,0 +1,71 @@
+// SCSS variables equivalentes para manipulación de color
+$bg-left: #4a3c80;
+$bg-right: #2f2a5a;
+
+.split-screen {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  .left, .right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    padding: 2rem;
+    transition: all 0.3s ease-in-out;
+    font-family: var(--pixel-font);
+  }
+
+ .left {
+  background-color: $bg-left;
+  color: #ffffff; // blanco puro o más claro
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.right {
+  background-color: $bg-right;
+  color: #ffffff; // blanco puro o #fefefe
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+}
+
+
+h1, p {
+  text-shadow: 1px 1px 0 #000, 2px 2px 0 #000;
+}
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    max-width: 400px;
+  }
+
+  .split-screen {
+  cursor: url('/assets/cursor/cursor-pixel.png'), auto;
+
+  .left, .right {
+    cursor: url('/assets/cursor/cursor-pixel.png'), auto;
+  }
+}
+
+}
