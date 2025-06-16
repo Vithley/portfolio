@@ -1,0 +1,120 @@
+.about-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Press Start 2P', monospace;
+  color: #39ff14;
+  background-color: #000;
+  border: 2px solid #39ff14;
+  border-radius: 10px;
+  padding: 2rem;
+  gap: 2rem;
+  position: relative;
+}
+
+.character-npc {
+  text-align: center;
+  cursor: pointer;
+}
+
+.character-npc img {
+  width: 200px;
+  height: auto;
+  image-rendering: pixelated;
+  border: 6px solid transparent;
+  border-image: url('/assets/images/marco-metalico.png') 30 round;
+  animation: floaty 3s ease-in-out infinite;
+}
+
+.dialog-box {
+  background: rgba(0, 0, 0, 0.85);
+  color: #39ff14;
+  border: 2px solid #39ff14;
+  padding: 1rem 2rem;
+  font-size: 0.65rem;
+  max-width: 600px;
+  text-align: center;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  animation: typingEffect 0.8s steps(30, end);
+  box-shadow: 0 0 15px #39ff14;
+}
+
+.dialog-box .cursor {
+  animation: blink 1s step-start infinite;
+  display: inline-block;
+}
+
+@keyframes typingEffect {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.about-btn {
+  background: #39ff14;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1rem;
+  font-size: 0.6rem;
+  font-family: 'Press Start 2P', monospace;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.about-btn:hover {
+  transform: scale(1.05);
+  background: #5aff3c;
+}
+
+.modal-content {
+  background-color: #111;
+  color: #39ff14;
+  border: 2px solid #39ff14;
+  font-family: 'Press Start 2P', monospace;
+  padding: 1rem;
+  font-size: 0.6rem;
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
+}
+
+@keyframes floaty {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.cheat-activated {
+  background: #ff007f;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.6rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #ff007f;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff007f;
+  }
+}

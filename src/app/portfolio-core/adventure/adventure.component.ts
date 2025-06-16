@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import * as AOS from 'aos';
 
@@ -9,18 +9,14 @@ import * as AOS from 'aos';
   templateUrl: './adventure.component.html',
   styleUrl: './adventure.component.scss'
 })
-export class AdventureComponent {
- hoverComputer = false;
- hoverMutant = false;
- dialogText = '';
- backgroundMusic!: HTMLAudioElement;
- clickSound!: HTMLAudioElement;
- 
- 
- constructor(
-  private router: Router,
-  ) {}
- 
+export class AdventureComponent implements OnDestroy {
+  hoverComputer = false;
+  hoverMutant = false;
+  dialogText = '';
+  backgroundMusic!: HTMLAudioElement;
+  clickSound!: HTMLAudioElement;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     AOS.init({
@@ -32,7 +28,6 @@ export class AdventureComponent {
 
     this.dialogText = '👀 [Narrador]: Examina la habitación y busca algo interesante...';
 
-    // 🎵 Música de fondo
     this.backgroundMusic = new Audio('assets/audio/retro-chiptune-adventure.mp3');
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.3;
@@ -40,14 +35,12 @@ export class AdventureComponent {
       console.warn('Autoplay bloqueado por el navegador:', err);
     });
 
-    // 🔊 Sonido de clic
-    this.clickSound = new Audio('assets/sound/retro-click-236673.mp3'); // sin barra inicial
-    this.clickSound.volume = 0.8; // ajusta si suena muy fuerte
+    this.clickSound = new Audio('assets/sound/retro-click-236673.mp3');
+    this.clickSound.volume = 0.8;
   }
 
   openProject(projectId: string) {
-    // 🔊 Reproducir clic
-    this.clickSound.currentTime = 0; // reinicia por si está en reproducción
+    this.clickSound.currentTime = 0;
     this.clickSound.play().catch(err => {
       console.warn('No se pudo reproducir el sonido de clic:', err);
     });
@@ -62,5 +55,12 @@ export class AdventureComponent {
       this.dialogText = '';
       this.router.navigate(['/projects', projectId]);
     }, 2500);
+  }
+
+  ngOnDestroy(): void {
+    if (this.backgroundMusic) {
+      this.backgroundMusic.pause();
+      this.backgroundMusic.currentTime = 0;
+    }
   }
 }

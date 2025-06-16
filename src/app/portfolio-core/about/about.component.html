@@ -1,0 +1,28 @@
+<div class="about-wrapper">
+  <div class="character-npc" (click)="activateCheat()" [ngClass]="{ 'cheat-activated': isCheatActivated }">
+    <img src="/assets/images/retrato.png" alt="Retrato de Carolina" />
+  </div>
+
+  <div class="dialog-box">
+    {{ dialogText }}<span class="cursor">█</span>
+  </div>
+
+  <button class="about-btn" (click)="openCuriosidadesModal(curiosidades)">Conóceme más</button>
+
+  <ng-template #curiosidades let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">✨ Curiosidades</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+      <ul>
+        <li>🎮 Fan de *Day of the Tentacle* desde los 9 años.</li>
+        <li>🧠 Me encantan los puzzles de lógica y los juegos de mesa.</li>
+        <li>💻 Tengo más side-projects que pestañas abiertas en el navegador.</li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button class="about-btn" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+</div>
