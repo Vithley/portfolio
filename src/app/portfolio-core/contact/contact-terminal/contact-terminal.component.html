@@ -1,0 +1,42 @@
+<div class="terminal">
+
+  <p class="system">> INICIANDO TERMINAL DE CONTACTO v1.0</p>
+  <p class="system">> ESTADO: OPERATIVO</p>
+
+  <div *ngIf="step === 'name'">
+    <p>> Identifícate, valiente aventurero:</p>
+    <input
+      [(ngModel)]="data.name"
+      (keydown.enter)="next()"
+      placeholder="Escribe tu nombre"
+      autofocus
+    />
+  </div>
+
+  <div *ngIf="step === 'email'">
+    <p>> ¿Cómo puedo localizarte en este universo digital?</p>
+    <input
+      [(ngModel)]="data.email"
+      (keydown.enter)="next()"
+      placeholder="email@dominio.com"
+    />
+  </div>
+
+  <div *ngIf="step === 'message'">
+    <p>> Escribe tu mensaje. Prometo no juzgar 🤖</p>
+    <textarea
+      [(ngModel)]="data.message"
+      placeholder="Tu mensaje aquí..."
+    ></textarea>
+    <button (click)="next()">ENVIAR MENSAJE</button>
+  </div>
+
+<p *ngIf="step === 'done'">
+  ✔ MENSAJE ENVIADO<br />
+  🏆 LOGRO DESBLOQUEADO:<br />
+  <strong>“CONTACTAR A LA PROGRAMADORA”</strong><br /><br />
+  > Gracias por jugar.<br />
+  > Fin del capítulo "Contacto".
+</p>
+
+</div>

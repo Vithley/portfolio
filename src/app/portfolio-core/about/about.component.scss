@@ -10,7 +10,12 @@
   padding: 2rem;
   gap: 2rem;
   position: relative;
+    max-width: 900px;
+  min-height: 80vh;
+  margin: 3rem auto;
 }
+
+
 
 .character-npc {
   text-align: center;
@@ -24,6 +29,37 @@
   border: 6px solid transparent;
   border-image: url('/assets/images/marco-metalico.png') 30 round;
   animation: floaty 3s ease-in-out infinite;
+}
+
+.console-input {
+  margin-top: 1rem;
+  color: #39ff14;
+  font-size: 0.6rem;
+  font-family: 'Press Start 2P', monospace;
+
+  .prompt {
+    margin-right: 0.2rem;
+  }
+
+  .blinking-cursor {
+    animation: blink 1s step-start infinite;
+  }
+}
+
+.console-input-field {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed #39ff14;
+  color: #39ff14;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  outline: none;
+  width: 300px;
+}
+
+.console-input-field::placeholder {
+  color: #39ff14;
+  opacity: 0.4;
 }
 
 .dialog-box {
@@ -79,17 +115,73 @@
 }
 
 .modal-content {
-  background-color: #111;
+  background-color: #000; // Fondo completamente negro
   color: #39ff14;
-  border: 2px solid #39ff14;
   font-family: 'Press Start 2P', monospace;
-  padding: 1rem;
+  border: 3px double #39ff14;
+  border-radius: 0;
+  box-shadow: 0 0 20px #39ff14;
+  text-align: left;
+  padding: 2rem;
   font-size: 0.6rem;
+  background-image: repeating-linear-gradient(45deg, #111 0px, #111 2px, #000 2px, #000 4px); // efecto retro pixelado
 }
 
-.modal-header,
-.modal-footer {
+@keyframes zoomInRetro {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header, .modal-footer {
   border: none;
+  background-color: transparent;
+  color: #39ff14;
+}
+
+.modal-title {
+  font-size: 0.7rem;
+  color: #39ff14;
+  border-bottom: 1px dashed #39ff14;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+
+  &::before {
+    content: '🕹️';
+    margin-right: 0.5rem;
+  }
+}
+
+.modal-body ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.modal-body li {
+  background-color: #111;
+  margin-bottom: 0.8rem;
+  padding: 0.6rem 1rem;
+  border: 2px solid #39ff14;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0 #000;
+}
+
+.btn-close {
+  display: none;
+}
+
+.modal-content .about-btn.close-top {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.6rem;
+  padding: 0.4rem 0.7rem;
+  box-shadow: 2px 2px 0 #000;
 }
 
 @keyframes floaty {

@@ -1,0 +1,28 @@
+<div class="room">
+
+  <div class="message-box">
+    {{ message }}
+  </div>
+
+  <div class="objects">
+    <button class="object terminal" (click)="interact('terminal')">
+      📟
+    </button>
+    
+
+    <button
+    class="object email"
+    (click)="interact('email')">
+    📧
+    </button>
+
+
+    <button class="object phone" (click)="interact('phone')">
+      📞
+    </button>
+  </div>
+
+  <app-contact-terminal *ngIf="showForm"></app-contact-terminal>
+
+
+</div>

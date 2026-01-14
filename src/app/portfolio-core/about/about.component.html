@@ -2,11 +2,31 @@
   <div class="character-npc" (click)="activateCheat()" [ngClass]="{ 'cheat-activated': isCheatActivated }">
     <img src="/assets/images/retrato.png" alt="Retrato de Carolina" />
   </div>
+  <div class="retro-widget" data-aos="fade-right" data-aos-delay="300">
+  <h3 class="widget-title">🧠 Sistema NPC</h3>
+  <ul class="widget-log">
+    <li>> CPU: Z80 Overclocked</li>
+    <li>> Memoria: 16KB + chicles</li>
+    <li>> Estado: ⚡ Online</li>
+    <li>> Temperatura: 42.8°C</li>
+    <li>> Última actualización: hace 5ms</li>
+  </ul>
+</div>
+<div class="console-input" *ngIf="isCheatActivated">
+  <span class="prompt">></span>
+  <input
+    type="text"
+    [(ngModel)]="userInput"
+    (keydown.enter)="handleCommand()"
+    class="console-input-field"
+    placeholder="Escribe un comando..."
+    autocomplete="off"
+  />
+</div>
 
-  <div class="dialog-box">
-    {{ dialogText }}<span class="cursor">█</span>
-  </div>
-
+<div class="dialog-box" *ngIf="consoleOutput">
+  {{ consoleOutput }}<span class="cursor">█</span>
+</div>
   <button class="about-btn" (click)="openCuriosidadesModal(curiosidades)">Conóceme más</button>
 
   <ng-template #curiosidades let-modal>
@@ -22,7 +42,7 @@
       </ul>
     </div>
     <div class="modal-footer">
-      <button class="about-btn" (click)="modal.close()">Cerrar</button>
+     <button type="button" class="about-btn" (click)="modal.close()">✖ Cerrar</button>
     </div>
   </ng-template>
 </div>

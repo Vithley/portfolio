@@ -5,6 +5,7 @@ import { MainWrapperComponent } from './portfolio-core/main/main-wrapper/main-wr
 import { AdventureComponent } from './portfolio-core/adventure/adventure.component';
 import { ModoCvComponent } from './portfolio-core/modo-cv/modo-cv.component';
 import { AboutComponent } from './portfolio-core/about/about.component';
+import { ContactComponent } from './portfolio-core/contact/contact.component';
 
 
 
@@ -28,6 +29,10 @@ export const routes: Routes = [
       {
         path: 'about',
         component: AboutComponent 
+      },
+        {
+        path: 'contact',
+        component: ContactComponent 
       },
     ],
   }

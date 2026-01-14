@@ -19,3 +19,12 @@ body {
   align-items: start;
   background-color: black !important;
 }
+
+.modal-content {
+  background-color: #000 !important;
+  background-image: repeating-linear-gradient(45deg, #111 0px, #111 2px, #000 2px, #000 4px) !important;
+  color: #39ff14 !important;
+  font-family: 'Press Start 2P', monospace !important;
+   border: 4px solid #39ff14; // borde más grueso
+  box-shadow: 0 0 40px #39ff14; // brillo extra
+}

@@ -1,0 +1,43 @@
+
+.room {
+  height: 100vh;
+  background: #1a1a1a;
+  color: #33ff33;
+  font-family: 'VT323', monospace;
+  padding: 20px;
+}
+
+.message-box {
+  border: 2px solid #33ff33;
+  padding: 12px;
+  margin-bottom: 20px;
+  min-height: 60px;
+}
+
+.objects {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.object {
+  width: 80px;
+  height: 80px;
+  font-size: 2.5rem;
+  background: #000;
+  border: 2px solid #33ff33;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.object:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 10px #33ff33;
+}
+
+.object:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
