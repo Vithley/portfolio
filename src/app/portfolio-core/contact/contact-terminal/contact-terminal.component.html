@@ -25,9 +25,11 @@
   <div *ngIf="step === 'message'">
     <p>> Escribe tu mensaje. Prometo no juzgar 🤖</p>
     <textarea
-      [(ngModel)]="data.message"
-      placeholder="Tu mensaje aquí..."
+    [(ngModel)]="data.message"
+    placeholder="Tu mensaje aquí..."
+    (keydown.enter)="next()"
     ></textarea>
+
     <button (click)="next()">ENVIAR MENSAJE</button>
   </div>
 
@@ -38,5 +40,12 @@
   > Gracias por jugar.<br />
   > Fin del capítulo "Contacto".
 </p>
+
+<app-modal 
+  *ngIf="modalMessage"
+  [message]="modalMessage"
+  (close)="closeModal()">
+</app-modal>
+
 
 </div>

@@ -1,139 +1,48 @@
-
+/* Contenedor general de la aventura */
 .adventure-wrapper {
-  width: 80vw; // o el tamaño que desees (por ejemplo: 80vw para más marco)
+  height: 98vh;
   aspect-ratio: 16 / 9;
-  margin: auto;
-  margin-top: 2vh; // pequeño margen superior opcional
+  width: auto;
+  max-width: 100%;
+  margin: 2vh auto 0;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 1200px) {
+    height: 85vh;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (max-width: 480px) {
+    width: 98%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-top: 8px;
+  }
 }
 
-
+/* Escena de la habitación */
 .adventure-scene {
   width: 100%;
   height: 100%;
   background-image: url('/assets/images/room.png');
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  position: relative;
+  position: relative; /* referencia para los hotspots absolute */
   cursor: url('/assets/cursor/pointer.cur'), auto;
-}
 
-/* Hotspot del ordenador */
-.hotspot-computer {
-  position: absolute;
-  top: 42.5%;
-  left: 29.6%;
-  width: 9%;
-  height: 15%;
-  cursor: pointer;
-  z-index: 5;
-
-  .glow-overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(57, 255, 20, 0.0);
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 0 transparent;
-  }
-
-  .glow-overlay.active {
-    background: rgba(57, 255, 20, 0.25);
-    box-shadow: 0 0 12px 4px rgba(57, 255, 20, 0.6);
-    border: 2px solid rgba(57, 255, 20, 0.5);
-  }
-
-  .tooltip {
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: #39ff14;
-    font-size: 0.6rem;
-    padding: 4px 6px;
-    border-radius: 3px;
-    font-family: 'Press Start 2P', monospace;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  &:hover .tooltip {
-    opacity: 1;
+  @media (max-width: 768px) {
+    background-size: cover;
   }
 }
 
-/* Hotspots generales */
-.hotspot {
-  position: absolute;
-  width: 7%;
-  height: 11%;
-  cursor: pointer;
-  z-index: 5;
-
-  .tooltip {
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    font-size: 0.6rem;
-    padding: 4px 6px;
-    border-radius: 3px;
-    font-family: 'Press Start 2P', monospace;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  &:hover .tooltip {
-    opacity: 1;
-  }
-}
-
-/* Hotspot sobre el tentáculo (círculo verde animado) */
-.mutant-hotspot {
-  top: 51%;         // ← NUEVO
-  left: 75%;        // ← NUEVO
-  width: 8%;
-  height: 14%;      // ← Opcional si también lo ajustaste visualmente
-
-  .glow-overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 255, 155, 0.0);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 0 transparent;
-    animation: glowPulse 2s infinite ease-in-out;
-  }
-
-  .glow-overlay.active {
-    background: rgba(0, 255, 155, 0.3);
-    box-shadow: 0 0 14px 5px rgba(0, 255, 155, 0.7);
-    border: 2px solid rgba(0, 255, 155, 0.5);
-  }
-
-  .hotspot-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.6rem;
-    color: #00ff9c;
-  }
-
-  .tooltip {
-    color: #00ff9c;
-  }
-}
-
+/* Cuadro de diálogo estilo aventura gráfica */
 .dialog-box {
   position: absolute;
   bottom: 5%;
@@ -150,34 +59,109 @@
   max-width: 80%;
   text-align: center;
   animation: fadeInOut 2.5s ease-out;
-}
 
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(10px);
+  @media (max-width: 768px) {
+    padding: 0.75rem 1rem;
+    font-size: 0.5rem;
+    max-width: 85%;
+    border-width: 1px;
+    border-radius: 6px;
   }
-  10% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-  90% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
+
+  @media (max-width: 480px) {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.4rem;
+    max-width: 90%;
+    bottom: 3%;
   }
 }
 
+/* Hotspots: ahora ABSOLUTE y en % para que escalen con la escena */
+.hotspot-contact,
+.hotspot-computer,
+.mutant-hotspot,
+.hotspot-about,
+.hotspot-cv,
+.hotspot-demo,
+.hotspot-code {
+  position: absolute; /* ✅ clave */
+  cursor: pointer;
+  z-index: 6;
+  display: block;
+  pointer-events: auto;
+  background: transparent;
+}
 
-/* Efecto glow */
-@keyframes glowPulse {
-  0%, 100% {
-    filter: brightness(1);
+/* Ajusta estos % una vez y ya no se descuadran nunca */
+.hotspot-contact {
+  top: 48%;
+  left: 39%;
+  width: 7%;
+  height: 5%;
+}
+
+.hotspot-about {
+  top: 21%;
+  left: 72%;
+  width: 11%;
+  height: 4.5%;
+}
+
+.hotspot-cv {
+  top: 30%;
+  left: 80%;
+  width: 9%;
+  height: 4.5%;
+}
+
+.hotspot-demo {
+  top: 40%;
+  left: 80%;
+  width: 7%;
+  height: 10%;
+}
+
+.hotspot-code {
+  top: 46%;
+  left: 8%;
+  width: 6%;
+  height: 6%;
+}
+
+/* Glow overlay */
+.glow-overlay {
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background-color: transparent;
+  opacity: 0;
+  border-radius: 5px;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease;
+  z-index: 5;
+
+  @media (max-width: 768px) {
+    border-radius: 4px;
   }
-  50% {
-    filter: brightness(1.8);
+
+  @media (max-width: 480px) {
+    border-radius: 3px;
   }
+}
+
+/* Glow overlay activo (hover o clic) */
+.glow-overlay.active {
+  opacity: 1 !important;
+  transform: scale(1.08);
+  background-color: transparent;
+}
+
+/* Animación de parpadeo al hacer clic */
+.glow-overlay.clicked {
+  animation: flashGlow 0.5s ease-out;
+}
+
+@keyframes flashGlow {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0; transform: scale(1); }
 }

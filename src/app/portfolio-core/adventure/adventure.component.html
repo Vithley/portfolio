@@ -5,28 +5,59 @@
       <p>{{ dialogText }}</p>
     </div>
 
-    <div
-      class="hotspot-computer"
-      (click)="openProject('terminal')"
-      (mouseenter)="hoverComputer = true"
-      (mouseleave)="hoverComputer = false"
-    >
-      <div class="glow-overlay" [class.active]="hoverComputer"></div>
-      <span class="tooltip">💻 Consola Angular</span>
-    </div>
+
+
+  <div
+    class="hotspot-contact"
+    (mouseenter)="hoverContact = true"
+    (mouseleave)="hoverContact = false"
+    (click)="goToContact()"
+  >
+    <div class="glow-overlay" [class.active]="hoverContact"></div>
+    <span class="tooltip">💻 Contacto</span>
+  </div>
+
+  <div
+    class="hotspot-about"
+    (mouseenter)="hoverAbout = true"
+    (mouseleave)="hoverAbout = false"
+    (click)="goToAbout()"
+  >
+    <div class="glow-overlay" [class.active]="hoverAbout"></div>
+    <span class="tooltip">💻 About me</span>
+  </div>
+
+  <div
+    class="hotspot-cv"
+    (mouseenter)="hoverCv = true"
+    (mouseleave)="hoverCv = false"
+    (click)="goToCv()"
+  >
+    <div class="glow-overlay" [class.active]="hoverCv"></div>
+    <span class="tooltip">💻 Experiencia</span>
+  </div>
+
+  <div
+    class="hotspot-demo"
+    (mouseenter)="hoverDemo = true"
+    (mouseleave)="hoverDemo = false"
+    (click)="goToDemo()"
+  >
+    <div class="glow-overlay" [class.active]="hoverDemo"></div>
+    <span class="tooltip">💻 Experiencia</span>
+  </div>
 
     <div
-    class="hotspot mutant-hotspot"
-    style="top: 32%; left: 64%;"
-    (click)="openProject('tentaculo')"
-    (mouseenter)="hoverMutant = true"
-    (mouseleave)="hoverMutant = false"
-    data-aos="fade-up"
-    data-aos-delay="600"
-    >
-    <div class="glow-overlay" [class.active]="hoverMutant"></div>
-        <span class="tooltip">🧪 Proyecto mutante</span>
-    </div>
+    class="hotspot-code"
+    (mouseenter)="hoverCode = true"
+    (mouseleave)="hoverCode = false"
+    (click)="goToCode()"
+  >
+    <div class="glow-overlay" [class.active]="hoverCode"></div>
+    <span class="tooltip">💻 Código</span>
+  </div>
+
+
 
   </div>
 </div>

@@ -6,35 +6,44 @@ import { AdventureComponent } from './portfolio-core/adventure/adventure.compone
 import { ModoCvComponent } from './portfolio-core/modo-cv/modo-cv.component';
 import { AboutComponent } from './portfolio-core/about/about.component';
 import { ContactComponent } from './portfolio-core/contact/contact.component';
+import { DemoGameComponent } from './portfolio-core/demo-game/demo-game.component';
 
 
 
 export const routes: Routes = [
+
+  // 🟢 HOME SIN NAVBAR
+  {
+    path: '',
+    component: HomeComponent
+  },
+
+  // 🟢 RESTO DE LA APP CON NAVBAR
   {
     path: '',
     component: MainWrapperComponent,
     children: [
       {
-        path: '',
-        component: HomeComponent 
-      },
-      {
         path: 'aventura',
-        component: AdventureComponent 
+        component: AdventureComponent
       },
       {
         path: 'cv',
-        component: ModoCvComponent 
+        component: ModoCvComponent
       },
       {
         path: 'about',
-        component: AboutComponent 
+        component: AboutComponent
       },
-        {
+      {
         path: 'contact',
-        component: ContactComponent 
+        component: ContactComponent
       },
-    ],
+       {
+        path: 'demo',
+        component: DemoGameComponent
+      }
+    ]
   }
 ];
 

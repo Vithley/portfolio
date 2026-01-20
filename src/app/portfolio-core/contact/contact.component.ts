@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactTerminalComponent } from './contact-terminal/contact-terminal.component';
+import { Router } from '@angular/router';
 
 type PuzzleState = {
   terminalActivated: boolean;
@@ -30,6 +31,8 @@ export class ContactComponent {
   };
 
   showForm = false;
+
+  constructor( private router: Router) { }
 
   interact(object: 'terminal' | 'email' | 'phone') {
     console.log('Click en:', object); // 👈 DEBUG
@@ -61,4 +64,9 @@ export class ContactComponent {
 
     }
   }
+
+  goBack() {
+    this.router.navigate(['/aventura']);
+  }
+
 }

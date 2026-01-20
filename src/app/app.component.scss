@@ -1,0 +1,44 @@
+.navbar-hover-zone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 22px;
+  z-index: 1000;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* pista visual */
+.menu-hint {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1rem;
+  color: #39ff14;
+  opacity: 0.6;
+  animation: blink 1.8s steps(2, end) infinite;
+  pointer-events: none;
+}
+
+/* al hover desaparece la pista */
+.navbar-hover-zone:hover .menu-hint {
+  opacity: 0;
+}
+
+/* navbar */
+.navbar-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(-110%);
+  transition: transform 0.25s steps(4, end);
+}
+
+.navbar-hover-zone:hover .navbar-panel {
+  transform: translateY(0);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+}

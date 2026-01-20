@@ -14,9 +14,9 @@ html, body, app-root {
 }
 
 body {
-  display: flex;
   justify-content: center;
   align-items: start;
+  overflow-x: hidden;
   background-color: black !important;
 }
 
@@ -28,3 +28,4 @@ body {
    border: 4px solid #39ff14; // borde más grueso
   box-shadow: 0 0 40px #39ff14; // brillo extra
 }
+

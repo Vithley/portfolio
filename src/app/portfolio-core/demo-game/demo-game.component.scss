@@ -1,0 +1,362 @@
+.demo-scene {
+  width: 80vw;
+  aspect-ratio: 16 / 9;
+  height: auto;
+
+  margin: auto;
+  background: url('/assets/images/paisaje.jpg') center / contain no-repeat;
+  border: 3px solid #39ff14;
+  overflow: hidden;
+  position: relative;
+}
+
+/* HUD superior */
+.game-hud {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 20px;
+  z-index: 20;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.hud-item {
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid #39ff14;
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+}
+
+.hud-label {
+  font-size: 0.5rem;
+  color: #39ff14;
+  opacity: 0.8;
+}
+
+.hud-value {
+  font-size: 0.7rem;
+  color: #39ff14;
+  text-align: center;
+}
+
+/* Pantallas de inicio/fin */
+.game-start,
+.game-end {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 25;
+  backdrop-filter: blur(4px);
+}
+
+.start-panel,
+.end-panel {
+  background: #000;
+  border: 3px solid #39ff14;
+  border-radius: 12px;
+  padding: 30px 40px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+  font-family: 'Press Start 2P', monospace;
+  max-width: 90%;
+}
+
+.start-title,
+.end-title {
+  font-size: 1.2rem;
+  color: #39ff14;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
+}
+
+.start-text,
+.end-text {
+  font-size: 0.6rem;
+  color: #39ff14;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  opacity: 0.9;
+}
+
+.start-button,
+.restart-button {
+  background: #000;
+  color: #39ff14;
+  border: 2px solid #39ff14;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  cursor: url('/assets/cursor/pointer.cur'), pointer;
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.start-button:hover,
+.restart-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.7);
+}
+
+.end-panel.win {
+  border-color: #ffd700;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+}
+
+.end-panel.win .end-title {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+/* Objetos coleccionables */
+.collectible {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  z-index: 5;
+  transform: translate(-20px, -20px);
+  transition: all 0.2s ease;
+  animation: float 2s ease-in-out infinite;
+  cursor: url('/assets/cursor/pointer.cur'), pointer;
+}
+
+.collectible-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 8px rgba(57, 255, 20, 0.5));
+}
+
+.collectible.collected {
+  opacity: 0;
+  transform: translate(-20px, -20px) scale(2);
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-20px, -20px) translateY(0); }
+  50% { transform: translate(-20px, -20px) translateY(-10px); }
+}
+
+.collectible.collected .collectible-icon {
+  animation: collect 0.4s ease-out;
+}
+
+@keyframes collect {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.5) rotate(180deg); }
+  100% { transform: scale(0) rotate(360deg); }
+}
+
+
+
+/* PERSONAJE */
+.character {
+  position: absolute;
+  width: 48px;
+  height: 64px;
+  transition: left 0.8s linear, top 0.8s linear;
+  image-rendering: pixelated;
+  z-index: 10;
+}
+
+/* OBJETOS */
+.object {
+  position: absolute;
+  image-rendering: pixelated;
+}
+
+.computer {
+  left: 60%;
+  top: 55%;
+  width: 64px;
+}
+
+/* Efecto al activarse */
+.computer.active {
+  animation: glow 1s infinite alternate;
+}
+
+.character {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  transition: left 0.8s linear, top 0.8s linear;
+  image-rendering: pixelated;
+  z-index: 10;
+}
+
+.character img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  display: block;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: #000;
+  color: #39ff14;
+  border: 2px solid #39ff14;
+  border-radius: 6px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: url('/assets/cursor/pointer.cur'), pointer;
+  z-index: 30;
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.back-arrow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.6);
+}
+
+@media (max-width: 768px) {
+  .demo-scene {
+    width: 92vw;
+  }
+
+  .back-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 0.75rem;
+    top: 10px;
+    left: 10px;
+    border-width: 1px;
+  }
+
+  .game-hud {
+    top: 10px;
+    right: 10px;
+    gap: 12px;
+  }
+
+  .hud-item {
+    padding: 6px 10px;
+  }
+
+  .hud-label {
+    font-size: 0.4rem;
+  }
+
+  .hud-value {
+    font-size: 0.6rem;
+  }
+
+  .start-title,
+  .end-title {
+    font-size: 0.9rem;
+  }
+
+  .start-text,
+  .end-text {
+    font-size: 0.5rem;
+  }
+
+  .start-button,
+  .restart-button {
+    font-size: 0.55rem;
+    padding: 10px 20px;
+  }
+
+  .collectible {
+    width: 35px;
+    height: 35px;
+  }
+
+  .collectible-icon {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .demo-scene {
+    width: 96vw;
+  }
+
+  .back-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 0.65rem;
+    top: 8px;
+    left: 8px;
+  }
+
+  .game-hud {
+    top: 8px;
+    right: 8px;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .hud-item {
+    padding: 5px 8px;
+  }
+
+  .hud-label {
+    font-size: 0.35rem;
+  }
+
+  .hud-value {
+    font-size: 0.5rem;
+  }
+
+  .start-panel,
+  .end-panel {
+    padding: 20px 25px;
+  }
+
+  .start-title,
+  .end-title {
+    font-size: 0.75rem;
+    margin-bottom: 15px;
+  }
+
+  .start-text,
+  .end-text {
+    font-size: 0.4rem;
+    margin-bottom: 20px;
+  }
+
+  .start-button,
+  .restart-button {
+    font-size: 0.45rem;
+    padding: 8px 16px;
+  }
+
+  .collectible {
+    width: 30px;
+    height: 30px;
+  }
+
+  .collectible-icon {
+    font-size: 1.3rem;
+  }
+}
+
+
+
+@keyframes glow {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.5);
+  }
+}

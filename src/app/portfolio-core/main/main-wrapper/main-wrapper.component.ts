@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-main-wrapper',
   imports: [
-    NavbarComponent,
     RouterModule
   ],
   templateUrl: './main-wrapper.component.html',

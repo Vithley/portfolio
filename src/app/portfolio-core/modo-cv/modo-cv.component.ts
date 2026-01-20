@@ -17,33 +17,39 @@ export class ModoCvComponent implements OnDestroy {
   routerSub!: Subscription;
 
   constructor(private router: Router) {}
-
-  ngOnInit(): void {
+ ngOnInit(): void {
     AOS.init({ once: true, duration: 1000, easing: 'ease-out-cubic' });
     setTimeout(() => AOS.refresh(), 100);
 
+    // Crear el audio de máquina de escribir (no loop)
     this.typeSound = new Audio('assets/sound/retro_computer_from_2s.mp3');
     this.typeSound.volume = 0.2;
 
     this.typeNextCharacter();
 
+    // Detener sonido al navegar fuera
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        if (this.typeSound) {
-          this.typeSound.pause();
-          this.typeSound.currentTime = 0;
-        }
+        this.stopTypeSound();
       }
     });
   }
 
+  goToAdventure() {
+    this.router.navigate(['/aventura']);
+  }
+
   ngOnDestroy(): void {
+    this.stopTypeSound();
+    if (this.routerSub) this.routerSub.unsubscribe();
+  }
+
+  private stopTypeSound() {
     if (this.typeSound) {
       this.typeSound.pause();
       this.typeSound.currentTime = 0;
-    }
-    if (this.routerSub) {
-      this.routerSub.unsubscribe();
+      this.typeSound.src = ''; // libera memoria
+      this.typeSound.load();
     }
   }
 
@@ -52,11 +58,10 @@ export class ModoCvComponent implements OnDestroy {
       const char = this.fullText.charAt(this.index);
       this.typedText += char;
 
-      if (char !== ' ') {
+      // Solo reproducir el sonido si no hay otra instancia sonando
+      if (char !== ' ' && this.typeSound) {
         this.typeSound.currentTime = 0;
-        this.typeSound.play().catch(err => {
-          console.warn('No se pudo reproducir el sonido:', err);
-        });
+        this.typeSound.play().catch(err => console.warn('No se pudo reproducir el sonido:', err));
       }
 
       this.index++;

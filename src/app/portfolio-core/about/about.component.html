@@ -1,15 +1,28 @@
 <div class="about-wrapper">
+  <button
+    class="back-arrow"
+    type="button"
+    (click)="goToAdventure()"
+    aria-label="Volver a Aventura"
+  >
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
   <div class="character-npc" (click)="activateCheat()" [ngClass]="{ 'cheat-activated': isCheatActivated }">
-    <img src="/assets/images/retrato.png" alt="Retrato de Carolina" />
+   <img
+    [src]="isCheatActivated 
+      ? '/assets/images/retrato2.png' 
+      : '/assets/images/retrato.png'"
+    alt="Retrato de Carolina"
+  >
   </div>
   <div class="retro-widget" data-aos="fade-right" data-aos-delay="300">
   <h3 class="widget-title">🧠 Sistema NPC</h3>
   <ul class="widget-log">
-    <li>> CPU: Z80 Overclocked</li>
-    <li>> Memoria: 16KB + chicles</li>
-    <li>> Estado: ⚡ Online</li>
-    <li>> Temperatura: 42.8°C</li>
-    <li>> Última actualización: hace 5ms</li>
+    <li>Rol: Frontend Developer (Angular)</li>
+    <li>Modo: Puzzle Solver + UI Crafter</li>
+    <li>Especialidad: Componentes reutilizables & UX retro</li>
+    <li>Buff activo: calma en producción 😎</li>
+    <li>Debilidad: decir "una cosita más" y rehacer media app</li>
   </ul>
 </div>
 <div class="console-input" *ngIf="isCheatActivated">
@@ -36,9 +49,10 @@
     </div>
     <div class="modal-body">
       <ul>
-        <li>🎮 Fan de *Day of the Tentacle* desde los 9 años.</li>
-        <li>🧠 Me encantan los puzzles de lógica y los juegos de mesa.</li>
-        <li>💻 Tengo más side-projects que pestañas abiertas en el navegador.</li>
+        <li>🎮 Aventuras gráficas → me inspiran a crear interfaces con personalidad</li>
+        <li>🧩 Puzzles/acertijos → disfruto encontrando patrones y soluciones limpias</li>
+        <li>🌿 Naturaleza/animales → me recarga y me mantiene creativa</li>
+        <li>🛠️ Montaje/cacharreo → me encanta construir cosas que funcionan</li>
       </ul>
     </div>
     <div class="modal-footer">

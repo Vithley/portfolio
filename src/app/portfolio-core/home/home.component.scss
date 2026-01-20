@@ -1,71 +1,48 @@
-// SCSS variables equivalentes para manipulación de color
-$bg-left: #4a3c80;
-$bg-right: #2f2a5a;
-
-.split-screen {
-  display: flex;
-  width: 100vw;
+.home-screen {
   height: 100vh;
-  overflow: hidden;
-
-  .left, .right {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    padding: 2rem;
-    transition: all 0.3s ease-in-out;
-    font-family: var(--pixel-font);
-  }
-
- .left {
-  background-color: $bg-left;
-  color: #ffffff; // blanco puro o más claro
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  }
+  background: radial-gradient(circle, #111 0%, #000 80%);
+  color: #33ff33;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'VT323', monospace;
+  text-align: center;
 }
 
-.right {
-  background-color: $bg-right;
-  color: #ffffff; // blanco puro o #fefefe
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  }
+h1 {
+  font-size: 4rem;
+  margin: 0;
+  text-shadow: 0 0 10px #33ff33;
 }
 
-
-h1, p {
-  text-shadow: 1px 1px 0 #000, 2px 2px 0 #000;
-}
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    font-size: 1.2rem;
-    max-width: 400px;
-  }
-
-  .split-screen {
-  cursor: url('/assets/cursor/cursor-pixel.png'), auto;
-
-  .left, .right {
-    cursor: url('/assets/cursor/cursor-pixel.png'), auto;
-  }
+h2 {
+  font-size: 2rem;
+  margin: 10px 0 20px;
 }
 
+.intro {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-bottom: 40px;
+}
+
+.start-button {
+  background: black;
+  color: #33ff33;
+  border: 2px solid #33ff33;
+  padding: 15px 30px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  animation: blink 1.5s infinite;
+}
+
+.start-button:hover {
+  background: #33ff33;
+  color: black;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.5; }
 }

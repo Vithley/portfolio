@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -41,7 +42,7 @@ export class AboutComponent implements OnInit {
   ];
 
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private router: Router) {}
 
   ngOnInit(): void {
     this.typeNextCharacter();
@@ -84,5 +85,10 @@ export class AboutComponent implements OnInit {
       this.userInput = '';
     }
   }
+
+  goToAdventure() {
+    this.router.navigate(['/aventura']);
+  }
+
 
 }

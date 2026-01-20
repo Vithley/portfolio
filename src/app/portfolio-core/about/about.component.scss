@@ -10,7 +10,7 @@
   padding: 2rem;
   gap: 2rem;
   position: relative;
-    max-width: 900px;
+  max-width: 900px;
   min-height: 80vh;
   margin: 3rem auto;
 }
@@ -210,3 +210,36 @@
     box-shadow: 0 0 20px #ff007f;
   }
 }
+
+.back-arrow {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+
+  background: #000;
+  color: #39ff14;
+  border: 2px solid #39ff14;
+  border-radius: 6px;
+
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.9rem;
+  line-height: 1;
+
+  cursor: url('/assets/cursor/pointer.cur'), pointer;
+
+  box-shadow: 0 0 10px #39ff1466;
+  transition: transform 0.15s steps(2, end),
+              box-shadow 0.15s steps(2, end);
+  z-index: 10;
+}
+
+.back-arrow:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 16px #39ff14aa;
+}
+

@@ -1,0 +1,64 @@
+<div class="demo-scene" (click)="moveCharacter($event)">
+  <button
+    class="back-arrow"
+    type="button"
+    aria-label="Volver atrás"
+    (click)="goBack($event)"
+  >
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+
+  <!-- HUD superior -->
+  <div class="game-hud">
+    <div class="hud-item">
+      <span class="hud-label">TIEMPO:</span>
+      <span class="hud-value">{{ timeRemaining }}s</span>
+    </div>
+    <div class="hud-item">
+      <span class="hud-label">OBJETOS:</span>
+      <span class="hud-value">{{ objectsCollected }}/{{ totalObjects }}</span>
+    </div>
+  </div>
+
+  <!-- Pantalla de inicio -->
+  <div class="game-start" *ngIf="!gameStarted && !gameOver">
+    <div class="start-panel">
+      <h2 class="start-title">🎮 MISIÓN RETRO</h2>
+      <p class="start-text">Ayuda al pájaro a recoger {{ totalObjects }} objetos en {{ timeLimit }} segundos</p>
+      <button class="start-button" (click)="startGame()">INICIAR JUEGO</button>
+    </div>
+  </div>
+
+  <!-- Pantalla de fin de juego -->
+  <div class="game-end" *ngIf="gameOver">
+    <div class="end-panel" [class.win]="gameWon" [class.lose]="!gameWon">
+      <h2 class="end-title" *ngIf="gameWon">🏆 ¡VICTORIA!</h2>
+      <h2 class="end-title" *ngIf="!gameWon">⏰ TIEMPO AGOTADO</h2>
+      <p class="end-text" *ngIf="gameWon">¡Has recogido todos los objetos!</p>
+      <p class="end-text" *ngIf="!gameWon">Recogiste {{ objectsCollected }}/{{ totalObjects }} objetos</p>
+      <button class="restart-button" (click)="restartGame()">REINTENTAR</button>
+    </div>
+  </div>
+  
+  <!-- Personaje -->
+  <div
+    class="character"
+    [style.left.px]="charX"
+    [style.top.px]="charY"
+    *ngIf="gameStarted"
+  >
+    <img src="/assets/images/pajaro.png" />
+  </div>
+
+  <!-- Objetos coleccionables -->
+  <div
+    *ngFor="let obj of objects"
+    class="collectible"
+    [class.collected]="obj.collected"
+    [style.left.px]="obj.x"
+    [style.top.px]="obj.y"
+  >
+    <span class="collectible-icon">{{ obj.icon }}</span>
+  </div>
+
+</div>

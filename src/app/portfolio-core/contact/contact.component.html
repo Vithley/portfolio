@@ -1,28 +1,54 @@
 <div class="room">
-
-  <div class="message-box">
-    {{ message }}
+  <button
+    class="back-arrow"
+    type="button"
+    (click)="goBack()"
+    aria-label="Volver atrás"
+  >
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+  <div class="hud">
+    <div class="hud-title">CONTACTO</div>
+    <div class="hud-subtitle">Encuentra la mejor forma de hablar conmigo</div>
   </div>
 
-  <div class="objects">
-    <button class="object terminal" (click)="interact('terminal')">
-      📟
-    </button>
-    
+  <div class="panel">
+    <div class="message-box">
+      <span class="prompt">&gt;</span>
+      <span class="message">{{ message }}</span>
+      <span class="cursor">█</span>
+    </div>
 
-    <button
-    class="object email"
-    (click)="interact('email')">
-    📧
+    <div class="objects">
+      <button class="object terminal" (click)="interact('terminal')" [class.found]="puzzleState.terminalActivated">
+        <span class="icon">📟</span>
+        <span class="label">Terminal</span>
+      </button>
+
+    <button class="object email" (click)="interact('email')">
+      <span class="icon">
+        <i class="fa-regular fa-envelope"></i>
+      </span>
+      <span class="label">Email</span>
     </button>
 
-
-    <button class="object phone" (click)="interact('phone')">
-      📞
+      <button
+        class="object linkedin"
+        (click)="interact('phone')"
+        [class.found]="puzzleState.phoneFound"
+      >
+      <span class="icon">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </span>
+      <span class="label">LinkedIn</span>
     </button>
+
+    </div>
+
+    <div class="panel-footer">
+      <span class="hint">Pista: prueba el Terminal si quieres “modo hacker” 👾</span>
+    </div>
   </div>
 
   <app-contact-terminal *ngIf="showForm"></app-contact-terminal>
-
-
 </div>

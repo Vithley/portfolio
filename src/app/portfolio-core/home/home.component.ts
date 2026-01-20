@@ -12,33 +12,20 @@ export class HomeComponent implements OnInit {
 private clickSound: HTMLAudioElement;
 
   constructor(private router: Router) {
-    this.clickSound = new Audio('assets/sound/retro-click-236673.mp3'); // SIN barra al inicio
+    this.clickSound = new Audio('assets/sound/retro-click-236673.mp3');
   }
 
   ngOnInit(): void {
-    AOS.init({
-      once: true,
-      duration: 1000,
-      easing: 'ease-out-cubic'
-    });
-
-    setTimeout(() => {
-      AOS.refresh();
-    }, 100);
+    AOS.init();
   }
 
-  enterMode(mode: 'cv' | 'aventura') {
+  startGame() {
     this.clickSound.currentTime = 0;
-    this.clickSound.play().then(() => {
-      console.log('🔊 Sonido reproducido');
-    }).catch(err => {
-      console.warn('⚠️ No se pudo reproducir el sonido:', err);
-    });
+    this.clickSound.play();
 
     setTimeout(() => {
-      this.router.navigate([mode]);
-    }, 400);
+      this.router.navigate(['/aventura']); // o /world /intro
+    }, 300);
   }
-  
 }
 

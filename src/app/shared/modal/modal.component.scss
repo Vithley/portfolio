@@ -1,0 +1,29 @@
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: black;
+  color: #33ff33;
+  border: 2px solid #33ff33;
+  padding: 20px;
+  font-family: 'VT323', monospace;
+  text-align: center;
+}
+
+.modal-content button {
+  margin-top: 10px;
+  background: black;
+  color: #33ff33;
+  border: 1px solid #33ff33;
+  cursor: pointer;
+}

@@ -10,11 +10,14 @@ import * as AOS from 'aos';
   styleUrl: './adventure.component.scss'
 })
 export class AdventureComponent implements OnDestroy {
-  hoverComputer = false;
-  hoverMutant = false;
+  hoverAbout = false;
   dialogText = '';
   backgroundMusic!: HTMLAudioElement;
   clickSound!: HTMLAudioElement;
+  hoverContact = false;
+  hoverCv = false;
+  hoverDemo = false;
+  hoverCode = false;
 
   constructor(private router: Router) {}
 
@@ -45,17 +48,120 @@ export class AdventureComponent implements OnDestroy {
       console.warn('No se pudo reproducir el sonido de clic:', err);
     });
 
-    if (projectId === 'terminal') {
-      this.dialogText = '💬 [Narrador]: Este ordenador parece tener un secreto...';
-    } else if (projectId === 'tentaculo') {
-      this.dialogText = '🧪 [Narrador]: No toques eso, ¡podrías despertar algo mutante!';
+    let hotspot: HTMLElement | null = null;
+    if (projectId === 'terminal') hotspot = document.querySelector('.hotspot-computer');
+    else if (projectId === 'tentaculo') hotspot = document.querySelector('.mutant-hotspot');
+
+    if (hotspot) {
+      const glow = hotspot.querySelector('.glow-overlay');
+      glow?.classList.add('clicked');
+
+      // quitar la clase clicked después de la animación
+      setTimeout(() => glow?.classList.remove('clicked'), 500);
     }
 
+    // Cambiamos el texto del narrador dependiendo del hotspot
+    if (projectId === 'terminal') {
+      this.dialogText = '💬 [Narrador]: La consola brilla… ¿qué secretos tendrá Angular?';
+    } else if (projectId === 'tentaculo') {
+      this.dialogText = '🧪 [Narrador]: Un proyecto mutante se activa… ¡cuidado con el experimento!';
+    }
+
+    // Redirigir o cambiar sección tras un delay para simular exploración
     setTimeout(() => {
       this.dialogText = '';
-      this.router.navigate(['/projects', projectId]);
+      if (projectId === 'terminal') this.router.navigate(['/contact']); // terminal → contacto
+      else if (projectId === 'tentaculo') this.router.navigate(['/projects/tentaculo']); // mutante → proyecto
     }, 2500);
   }
+
+  goToContact() {
+    // reproducir sonido de clic
+    this.clickSound.currentTime = 0;
+    this.clickSound.play();
+
+    // animación glow
+    const hotspot = document.querySelector('.hotspot-contact .glow-overlay');
+    hotspot?.classList.add('clicked');
+    setTimeout(() => hotspot?.classList.remove('clicked'), 500);
+
+    // mensaje narrador tipo aventura gráfica
+    this.dialogText = '💬 [Narrador]: Te acercas al ordenador… ¡es hora de enviar un mensaje!';
+
+    // después de delay, navega a la sección de contacto
+    setTimeout(() => {
+      this.dialogText = '';
+      this.router.navigate(['/contact']);
+    }, 2000);
+  }
+
+  goToAbout() {
+    // reproducir sonido de clic
+    this.clickSound.currentTime = 0;
+    this.clickSound.play();
+    // animación glow
+    const hotspot = document.querySelector('.hotspot-about .glow-overlay');
+    hotspot?.classList.add('clicked');
+    setTimeout(() => hotspot?.classList.remove('clicked'), 500);
+    // mensaje narrador tipo aventura gráfica
+    this.dialogText = '💬 [Narrador]: Una figura misteriosa aparece… ¡es hora de descubrir más!'
+    // después de delay, navega a la sección de about
+    setTimeout(() => {
+      this.dialogText = '';
+      this.router.navigate(['/about']);
+    }, 2000)
+  }
+
+  goToCv() {
+    // reproducir sonido de clic
+    this.clickSound.currentTime = 0;
+    this.clickSound.play();
+    // animación glow
+    const hotspot = document.querySelector('.hotspot-cv .glow-overlay');
+    hotspot?.classList.add('clicked');
+    setTimeout(() => hotspot?.classList.remove('clicked'), 500);
+    // mensaje narrador tipo aventura gráfica
+    this.dialogText = '💬 [Narrador]: Encuentras un pergamino antiguo… ¡es hora de revisar tu experiencia!'
+    // después de delay, navega a la sección de cv
+    setTimeout(() => {
+      this.dialogText = '';
+      this.router.navigate(['/cv']);
+    }, 2000)  
+  }
+
+  goToDemo() {
+    // reproducir sonido de clic
+    this.clickSound.currentTime = 0;
+    this.clickSound.play();
+    // animación glow
+    const hotspot = document.querySelector('.hotspot-demo .glow-overlay');
+    hotspot?.classList.add('clicked');
+    setTimeout(() => hotspot?.classList.remove('clicked'), 500);
+    // mensaje narrador tipo aventura gráfica
+    this.dialogText = '💬 [Narrador]: Un portal brillante aparece… ¡es hora de probar el demo!'
+    // después de delay, navega a la sección de demo
+    setTimeout(() => {
+      this.dialogText = '';
+      this.router.navigate(['/demo']);
+    }, 2000)
+  } 
+
+  goToCode() {
+    this.clickSound.currentTime = 0;
+    this.clickSound.play();
+
+    const hotspot = document.querySelector('.hotspot-code .glow-overlay');
+    hotspot?.classList.add('clicked');
+    setTimeout(() => hotspot?.classList.remove('clicked'), 500);
+    this.dialogText = '💬 [Narrador]: Descubres un cofre del tesoro… ¡es hora de ver el código fuente!'
+    setTimeout(() => {
+      this.dialogText = '';
+       window.open('https://github.com/Vithley', '_blank');
+    }, 2000)
+  } 
+
+
+
 
   ngOnDestroy(): void {
     if (this.backgroundMusic) {
