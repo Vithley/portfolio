@@ -30,12 +30,12 @@
 .adventure-scene {
   width: 100%;
   height: 100%;
-  background-image: url('/assets/images/room.png');
+  background-image: url('../../../assets/images/room.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative; /* referencia para los hotspots absolute */
-  cursor: url('/assets/cursor/pointer.cur'), auto;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     background-size: cover;

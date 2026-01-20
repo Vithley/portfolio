@@ -19,7 +19,6 @@
   padding: 10px;
   background: repeating-linear-gradient(45deg, #444, #444 2px, #666 2px, #666 4px);
   border: 6px solid transparent;
-  border-image: url('/assets/images/marco-metalico.png') 30 round;
   image-rendering: pixelated;
 }
 
@@ -94,7 +93,7 @@
   font-size: 0.9rem;
   line-height: 1;
 
-  cursor: url('/assets/cursor/pointer.cur'), pointer;
+  cursor: pointer;
   box-shadow: 0 0 10px #39ff1466;
   transition: transform 0.15s steps(2, end), box-shadow 0.15s steps(2, end);
 }

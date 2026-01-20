@@ -27,7 +27,6 @@
   height: auto;
   image-rendering: pixelated;
   border: 6px solid transparent;
-  border-image: url('/assets/images/marco-metalico.png') 30 round;
   animation: floaty 3s ease-in-out infinite;
 }
 
@@ -230,7 +229,7 @@
   font-size: 0.9rem;
   line-height: 1;
 
-  cursor: url('/assets/cursor/pointer.cur'), pointer;
+  cursor: pointer;
 
   box-shadow: 0 0 10px #39ff1466;
   transition: transform 0.15s steps(2, end),
