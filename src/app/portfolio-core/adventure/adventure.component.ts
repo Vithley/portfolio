@@ -34,12 +34,14 @@ export class AdventureComponent implements OnDestroy {
 
   get backgroundStyle() {
     const imageUrl = this.isMobile ? 'assets/images/room2.png' : 'assets/images/room.png';
+    const bgSize = this.isMobile ? 'contain' : 'cover';
     console.log('Background URL:', imageUrl);
     return {
       'background-image': `url(${imageUrl})`,
-      'background-size': 'cover',
+      'background-size': bgSize,
       'background-position': 'center',
-      'background-repeat': 'no-repeat'
+      'background-repeat': 'no-repeat',
+      'background-color': this.isMobile ? '#000' : 'transparent'
     };
   }
 

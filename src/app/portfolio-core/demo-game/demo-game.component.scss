@@ -21,7 +21,8 @@
     aspect-ratio: auto;
     margin: 0;
     border: none;
-    background: url('../../../assets/images/paisaje2.png') center / cover no-repeat;
+    background: url('../../../assets/images/paisaje2.png') center / contain no-repeat;
+    background-color: #000;
   }
 
   @media (max-width: 480px) {
@@ -35,7 +36,8 @@
     aspect-ratio: auto;
     margin: 0;
     border: none;
-    background: url('../../../assets/images/paisaje2.png') center / cover no-repeat;
+    background: url('../../../assets/images/paisaje2.png') center / contain no-repeat;
+    background-color: #000;
   }
 }
 
