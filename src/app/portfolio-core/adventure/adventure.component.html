@@ -1,6 +1,6 @@
 <!-- adventure.component.html -->
 <div class="adventure-wrapper">
-  <div class="adventure-scene" data-aos="zoom-in">
+  <div class="adventure-scene" [ngStyle]="backgroundStyle" [class.mobile-scene]="isMobile" data-aos="zoom-in">
     <div class="dialog-box" *ngIf="dialogText">
       <p>{{ dialogText }}</p>
     </div>

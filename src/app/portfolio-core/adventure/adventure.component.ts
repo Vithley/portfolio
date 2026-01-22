@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import * as AOS from 'aos';
 
@@ -18,10 +18,34 @@ export class AdventureComponent implements OnDestroy {
   hoverCv = false;
   hoverDemo = false;
   hoverCode = false;
+  isMobile = false;
 
   constructor(private router: Router) {}
 
+  @HostListener('window:resize', [])
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize(): void {
+    this.isMobile = window.innerWidth <= 768;
+    console.log('isMobile:', this.isMobile, 'width:', window.innerWidth);
+  }
+
+  get backgroundStyle() {
+    const imageUrl = this.isMobile ? 'assets/images/room2.png' : 'assets/images/room.png';
+    console.log('Background URL:', imageUrl);
+    return {
+      'background-image': `url(${imageUrl})`,
+      'background-size': 'cover',
+      'background-position': 'center',
+      'background-repeat': 'no-repeat'
+    };
+  }
+
   ngOnInit(): void {
+    this.checkScreenSize();
+    
     AOS.init({
       once: true,
       duration: 1000
