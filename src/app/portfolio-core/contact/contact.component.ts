@@ -7,6 +7,7 @@ type PuzzleState = {
   terminalActivated: boolean;
   emailFound: boolean;
   phoneFound: boolean;
+  githubFound: boolean;
 };
 
 @Component({
@@ -21,20 +22,22 @@ export class ContactComponent {
   message = 'Exploras la sala... parece haber varios objetos interesantes.';
   linkedinUrl = 'https://www.linkedin.com/in/carolina-millán-artola-b6602196/';
   emailAddress = 'cmillan182@gmail.com';
+  githubUrl = 'https://github.com/Vithley';
 
 
 
   puzzleState: PuzzleState = {
     terminalActivated: false,
     emailFound: false,
-    phoneFound: false
+    phoneFound: false,
+    githubFound: false
   };
 
   showForm = false;
 
   constructor( private router: Router) { }
 
-  interact(object: 'terminal' | 'email' | 'phone') {
+  interact(object: 'terminal' | 'email' | 'phone' | 'github') {
     console.log('Click en:', object); // 👈 DEBUG
 
     switch (object) {
@@ -53,6 +56,12 @@ export class ContactComponent {
       this.puzzleState.phoneFound = true;
       this.message = 'Descuelgas el teléfono… alguien responde al otro lado.';
       window.open(this.linkedinUrl, '_blank');
+      break;
+
+      case 'github':
+      this.puzzleState.githubFound = true;
+      this.message = 'Abres el manual de proyectos… está todo en GitHub.';
+      window.open(this.githubUrl, '_blank');
       break;
 
 

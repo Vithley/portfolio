@@ -43,6 +43,17 @@
       <span class="label">LinkedIn</span>
     </button>
 
+    <button
+      class="object github"
+      (click)="interact('github')"
+      [class.found]="puzzleState.githubFound"
+    >
+      <span class="icon">
+        <i class="fa-brands fa-github"></i>
+      </span>
+      <span class="label">GitHub</span>
+    </button>
+
     </div>
 
     <div class="panel-footer">

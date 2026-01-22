@@ -32,15 +32,27 @@ export class DemoGameComponent implements OnInit, OnDestroy {
   gameStarted = false;
   gameOver = false;
   gameWon = false;
+  isMobile = false;
 
-  // Objects to collect
-  objects: GameObject[] = [
+  // Objects to collect (desktop positions)
+  desktopObjects: GameObject[] = [
     { id: 1, x: 150, y: 100, collected: false, icon: '⭐' },
     { id: 2, x: 400, y: 150, collected: false, icon: '💎' },
     { id: 3, x: 600, y: 250, collected: false, icon: '🏆' },
     { id: 4, x: 300, y: 300, collected: false, icon: '🎯' },
     { id: 5, x: 500, y: 80, collected: false, icon: '👑' }
   ];
+
+  // Mobile positions (ajustadas a pantalla completa)
+  mobileObjects: GameObject[] = [
+    { id: 1, x: 100, y: 150, collected: false, icon: '⭐' },
+    { id: 2, x: 250, y: 250, collected: false, icon: '💎' },
+    { id: 3, x: 180, y: 450, collected: false, icon: '🏆' },
+    { id: 4, x: 280, y: 350, collected: false, icon: '🎯' },
+    { id: 5, x: 150, y: 550, collected: false, icon: '👑' }
+  ];
+
+  objects: GameObject[] = [];
 
   // Audio
   collectSound!: HTMLAudioElement;
@@ -52,6 +64,9 @@ export class DemoGameComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   ngOnInit() {
+    this.checkScreenSize();
+    this.loadObjects();
+
     this.collectSound = new Audio('assets/sound/retro-beep.mp3');
     this.collectSound.volume = 0.5;
 
@@ -60,6 +75,19 @@ export class DemoGameComponent implements OnInit, OnDestroy {
 
     this.loseSound = new Audio('assets/sound/retro-beep.mp3');
     this.loseSound.volume = 0.6;
+
+    window.addEventListener('resize', () => {
+      this.checkScreenSize();
+      this.loadObjects();
+    });
+  }
+
+  checkScreenSize(): void {
+    this.isMobile = window.innerWidth <= 768;
+  }
+
+  loadObjects(): void {
+    this.objects = this.isMobile ? [...this.mobileObjects] : [...this.desktopObjects];
   }
 
   ngOnDestroy() {
@@ -74,10 +102,11 @@ export class DemoGameComponent implements OnInit, OnDestroy {
     this.gameWon = false;
     this.timeRemaining = this.timeLimit;
     this.objectsCollected = 0;
-    this.charX = 100;
-    this.charY = 200;
+    this.charX = this.isMobile ? 50 : 100;
+    this.charY = this.isMobile ? 300 : 200;
 
     // Reset objects
+    this.loadObjects();
     this.objects.forEach(obj => obj.collected = false);
 
     // Start timer
