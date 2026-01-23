@@ -44,7 +44,7 @@
     (click)="goToDemo()"
   >
     <div class="glow-overlay" [class.active]="hoverDemo"></div>
-    <span class="tooltip">💻 Experiencia</span>
+    <span class="tooltip">💻 Demo</span>
   </div>
 
     <div
@@ -57,7 +57,15 @@
     <span class="tooltip">💻 Código</span>
   </div>
 
-
+  <div
+    class="hotspot-cat"
+    (mouseenter)="hoverCat = true"
+    (mouseleave)="hoverCat = false"
+    (click)="goToCat()"
+  >
+    <div class="glow-overlay" [class.active]="hoverCat"></div>
+    <span class="tooltip">🐱 Gato</span>
+  </div>
 
   </div>
 </div>

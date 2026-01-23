@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as AOS from 'aos';
 
@@ -9,27 +9,137 @@ import * as AOS from 'aos';
   templateUrl: './adventure.component.html',
   styleUrl: './adventure.component.scss'
 })
-export class AdventureComponent implements OnDestroy {
+export class AdventureComponent implements OnDestroy, AfterViewInit {
   hoverAbout = false;
   dialogText = '';
   backgroundMusic!: HTMLAudioElement;
   clickSound!: HTMLAudioElement;
+  catSound!: HTMLAudioElement;
   hoverContact = false;
   hoverCv = false;
   hoverDemo = false;
   hoverCode = false;
+  hoverCat = false;
   isMobile = false;
+  
+  // Coordenadas relativas a la imagen (0-1)
+  private hotspotCoords = {
+    contact: { x: 0.36, y: 0.48, w: 0.10, h: 0.05 },
+    about: { x: 0.742, y: 0.200, w: 0.18, h: 0.06 },
+    cv: { x: 0.80, y: 0.30, w: 0.14, h: 0.045 },
+    demo: { x: 0.82, y: 0.40, w: 0.16, h: 0.10 },
+    code: { x: 0.04, y: 0.46, w: 0.11, h: 0.10 },
+    cat: { x: 0.48, y: 0.48, w: 0.07, h: 0.05 },
+  };
+  
+  // Coordenadas para móvil (si son diferentes)
+  private hotspotCoordsMobile = {
+    contact: { x: 0.28, y: 0.45, w: 0.20, h: 0.08 },
+    about: { x: 0.655, y: 0.150, w: 0.30, h: 0.07 },
+    cv: { x: 0.80, y: 0.26, w: 0.20, h: 0.045 },
+    demo: { x: 0.82, y: 0.36, w: 0.20, h: 0.10 },
+    code: { x: 0.02, y: 0.53, w: 0.21, h: 0.11 },
+    cat: { x: 0.58, y: 0.49, w: 0.13, h: 0.05 },
+  };
 
   constructor(private router: Router) {}
 
   @HostListener('window:resize', [])
   onResize() {
     this.checkScreenSize();
+    this.repositionHotspots();
+  }
+
+  @HostListener('window:orientationchange', [])
+  onOrientationChange() {
+    setTimeout(() => this.repositionHotspots(), 300);
   }
 
   checkScreenSize(): void {
-    this.isMobile = window.innerWidth <= 768;
-    console.log('isMobile:', this.isMobile, 'width:', window.innerWidth);
+    const width = window.innerWidth;
+    this.isMobile = width <= 768;
+    console.log('isMobile:', this.isMobile, 'width:', width);
+  }
+
+  ngAfterViewInit(): void {
+    // Esperar a que la imagen de fondo cargue antes de posicionar
+    setTimeout(() => this.repositionHotspots(), 500);
+  }
+
+  private repositionHotspots(): void {
+    const scene = document.querySelector('.adventure-scene') as HTMLElement;
+    if (!scene) return;
+
+    const imageUrl = this.isMobile ? 'assets/images/room2.png' : 'assets/images/room.png';
+    const img = new Image();
+    img.src = imageUrl;
+
+    img.onload = () => {
+      const sceneRect = scene.getBoundingClientRect();
+      const imgRatio = img.width / img.height;
+      const sceneRatio = sceneRect.width / sceneRect.height;
+
+      let visibleWidth: number, visibleHeight: number, offsetX = 0, offsetY = 0;
+
+      // Calcular dimensiones visibles según background-size: contain o cover
+      const bgSize = this.isMobile ? 'contain' : 'cover';
+      
+      if (bgSize === 'contain') {
+        if (sceneRatio > imgRatio) {
+          visibleHeight = sceneRect.height;
+          visibleWidth = visibleHeight * imgRatio;
+          offsetX = (sceneRect.width - visibleWidth) / 2;
+        } else {
+          visibleWidth = sceneRect.width;
+          visibleHeight = visibleWidth / imgRatio;
+          offsetY = (sceneRect.height - visibleHeight) / 2;
+        }
+      } else {
+        // cover
+        if (sceneRatio > imgRatio) {
+          visibleWidth = sceneRect.width;
+          visibleHeight = visibleWidth / imgRatio;
+          offsetY = (sceneRect.height - visibleHeight) / 2;
+        } else {
+          visibleHeight = sceneRect.height;
+          visibleWidth = visibleHeight * imgRatio;
+          offsetX = (sceneRect.width - visibleWidth) / 2;
+        }
+      }
+
+      // Usar coordenadas apropiadas según el dispositivo
+      const coords = this.isMobile ? this.hotspotCoordsMobile : this.hotspotCoords;
+
+      // Posicionar cada hotspot
+      this.positionHotspot('.hotspot-contact', coords.contact, visibleWidth, visibleHeight, offsetX, offsetY);
+      this.positionHotspot('.hotspot-about', coords.about, visibleWidth, visibleHeight, offsetX, offsetY);
+      this.positionHotspot('.hotspot-cv', coords.cv, visibleWidth, visibleHeight, offsetX, offsetY);
+      this.positionHotspot('.hotspot-demo', coords.demo, visibleWidth, visibleHeight, offsetX, offsetY);
+      this.positionHotspot('.hotspot-code', coords.code, visibleWidth, visibleHeight, offsetX, offsetY);
+      this.positionHotspot('.hotspot-cat', coords.cat, visibleWidth, visibleHeight, offsetX, offsetY);
+
+      console.log('Hotspots reposicionados:', { visibleWidth, visibleHeight, offsetX, offsetY });
+    };
+
+    // Si la imagen ya está cacheada, forzar onload
+    if (img.complete) img.onload!(new Event('load'));
+  }
+
+  private positionHotspot(
+    selector: string,
+    coords: { x: number; y: number; w: number; h: number },
+    imgW: number,
+    imgH: number,
+    offsetX: number,
+    offsetY: number
+  ): void {
+    const hotspot = document.querySelector(selector) as HTMLElement;
+    if (hotspot) {
+      hotspot.style.left = `${offsetX + coords.x * imgW}px`;
+      hotspot.style.top = `${offsetY + coords.y * imgH}px`;
+      hotspot.style.width = `${coords.w * imgW}px`;
+      hotspot.style.height = `${coords.h * imgH}px`;
+    }
   }
 
   get backgroundStyle() {
@@ -66,6 +176,14 @@ export class AdventureComponent implements OnDestroy {
 
     this.clickSound = new Audio('assets/sound/retro-click-236673.mp3');
     this.clickSound.volume = 0.8;
+    
+    this.catSound = new Audio('assets/sound/cat-sound.mp3');
+    this.catSound.volume = 0.7;
+    
+    // Debug: Agregar clase para visualización temporal
+    if (typeof window !== 'undefined' && window.location.search.includes('debug')) {
+      document.body.classList.add('hotspot-debug');
+    }
   }
 
   openProject(projectId: string) {
@@ -184,6 +302,26 @@ export class AdventureComponent implements OnDestroy {
       this.dialogText = '';
        window.open('https://github.com/Vithley', '_blank');
     }, 2000)
+  }
+
+  goToCat() {
+    // reproducir sonido del gato
+    this.catSound.currentTime = 0;
+    this.catSound.play();
+
+    // animación glow
+    const hotspot = document.querySelector('.hotspot-cat .glow-overlay');
+    hotspot?.classList.add('clicked');
+    setTimeout(() => hotspot?.classList.remove('clicked'), 500);
+
+    // mensaje narrador tipo aventura gráfica
+    this.dialogText = '🐱 [Narrador]: Me pareció ver un lindo gatito por aquí...';
+
+
+    // después de delay, limpia el mensaje
+    setTimeout(() => {
+      this.dialogText = '';
+    }, 2000);
   } 
 
 
