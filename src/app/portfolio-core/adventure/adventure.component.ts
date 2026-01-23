@@ -221,10 +221,13 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
       this.dialogText = '';
       if (projectId === 'terminal') this.router.navigate(['/contact']); // terminal → contacto
       else if (projectId === 'tentaculo') this.router.navigate(['/projects/tentaculo']); // mutante → proyecto
-    }, 5000);
+    }, 4000);
   }
 
   goToContact() {
+    this.indianaJonesSound.pause();
+    this.indianaJonesSound.currentTime = 0;
+    
     // reproducir sonido de clic
     this.clickSound.currentTime = 0;
     this.clickSound.play();
@@ -241,10 +244,13 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
       this.router.navigate(['/contact']);
-    }, 5000);
+    }, 4000);
   }
 
   goToAbout() {
+    this.indianaJonesSound.pause();
+    this.indianaJonesSound.currentTime = 0;
+    
     // reproducir sonido de clic
     this.clickSound.currentTime = 0;
     this.clickSound.play();
@@ -258,10 +264,13 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
       this.router.navigate(['/about']);
-    }, 5000)
+    }, 4000)
   }
 
   goToCv() {
+    this.indianaJonesSound.pause();
+    this.indianaJonesSound.currentTime = 0;
+    
     // reproducir sonido de clic
     this.clickSound.currentTime = 0;
     this.clickSound.play();
@@ -275,10 +284,13 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
       this.router.navigate(['/cv']);
-    }, 5000)  
+    }, 4000)  
   }
 
   goToDemo() {
+    this.indianaJonesSound.pause();
+    this.indianaJonesSound.currentTime = 0;
+    
     // reproducir sonido de clic
     this.clickSound.currentTime = 0;
     this.clickSound.play();
@@ -292,10 +304,13 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
       this.router.navigate(['/demo']);
-    }, 5000)
+    }, 4000)
   } 
 
   goToCode() {
+    this.indianaJonesSound.pause();
+    this.indianaJonesSound.currentTime = 0;
+    
     this.clickSound.currentTime = 0;
     this.clickSound.play();
 
@@ -306,10 +321,13 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
        window.open('https://github.com/Vithley', '_blank');
-    }, 5000)
+    }, 4000)
   }
 
   goToCat() {
+    this.indianaJonesSound.pause();
+    this.indianaJonesSound.currentTime = 0;
+    
     // reproducir sonido del gato
     this.catSound.currentTime = 0;
     this.catSound.play();
@@ -326,7 +344,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     // después de delay, limpia el mensaje
     setTimeout(() => {
       this.dialogText = '';
-    }, 5000);
+    }, 4000);
   }
 
   goToAdventure() {

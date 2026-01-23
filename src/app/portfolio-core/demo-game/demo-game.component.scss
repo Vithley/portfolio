@@ -154,7 +154,7 @@
   display: grid;
   place-items: center;
   z-index: 5;
-  transform: translate(-20px, -20px);
+  transform: translate(-50%, -50%);
   transition: all 0.2s ease;
   animation: float 2s ease-in-out infinite;
   cursor: pointer;
@@ -167,13 +167,13 @@
 
 .collectible.collected {
   opacity: 0;
-  transform: translate(-20px, -20px) scale(2);
+  transform: translate(-50%, -50%) scale(2);
   pointer-events: none;
 }
 
 @keyframes float {
-  0%, 100% { transform: translate(-20px, -20px) translateY(0); }
-  50% { transform: translate(-20px, -20px) translateY(-10px); }
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-10px); }
 }
 
 .collectible.collected .collectible-icon {
@@ -219,6 +219,7 @@
   position: absolute;
   width: 72px;
   height: 72px;
+  transform: translate(-50%, -50%);
   transition: left 0.8s linear, top 0.8s linear;
   image-rendering: pixelated;
   z-index: 10;

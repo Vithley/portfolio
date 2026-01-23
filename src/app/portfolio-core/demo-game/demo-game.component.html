@@ -55,8 +55,8 @@
     *ngFor="let obj of objects"
     class="collectible"
     [class.collected]="obj.collected"
-    [style.left.px]="obj.x"
-    [style.top.px]="obj.y"
+    [style.left.px]="obj.displayX"
+    [style.top.px]="obj.displayY"
   >
     <span class="collectible-icon">{{ obj.icon }}</span>
   </div>
