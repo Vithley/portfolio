@@ -89,7 +89,8 @@
 .hotspot-cv,
 .hotspot-demo,
 .hotspot-code,
-.hotspot-cat {
+.hotspot-cat,
+.hotspot-adventure {
   position: absolute; /* ✅ Controlado dinámicamente por JS */
   cursor: pointer;
   z-index: 6;
@@ -120,7 +121,8 @@
 .hotspot-cv,
 .hotspot-demo,
 .hotspot-code,
-.hotspot-cat {
+.hotspot-cat,
+.hotspot-adventure {
   /* Posiciones iniciales (se sobreescribirán por JS) */
   top: 0;
   left: 0;
@@ -156,6 +158,12 @@
   &.active .tooltip {
     opacity: 1;
   }
+}
+
+/* Tooltip especial para hotspot adventure (arriba en la pantalla, tooltip abajo) */
+.hotspot-adventure .tooltip {
+  bottom: auto;
+  top: 120%;
 }
 
 /* Glow overlay */
@@ -203,7 +211,8 @@ body.hotspot-debug {
   .hotspot-cv,
   .hotspot-demo,
   .hotspot-code,
-  .hotspot-cat {
+  .hotspot-cat,
+  .hotspot-adventure {
     border: 2px solid red !important;
     background: rgba(255, 0, 0, 0.3) !important;
     

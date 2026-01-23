@@ -15,11 +15,13 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
   backgroundMusic!: HTMLAudioElement;
   clickSound!: HTMLAudioElement;
   catSound!: HTMLAudioElement;
+  indianaJonesSound!: HTMLAudioElement;
   hoverContact = false;
   hoverCv = false;
   hoverDemo = false;
   hoverCode = false;
   hoverCat = false;
+  hoverAdventure = false;
   isMobile = false;
   
   // Coordenadas relativas a la imagen (0-1)
@@ -30,6 +32,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     demo: { x: 0.82, y: 0.40, w: 0.16, h: 0.10 },
     code: { x: 0.04, y: 0.46, w: 0.11, h: 0.10 },
     cat: { x: 0.48, y: 0.48, w: 0.07, h: 0.05 },
+    adventure: { x: 0.13, y: 0.08, w: 0.28, h: 0.11 },
   };
   
   // Coordenadas para móvil (si son diferentes)
@@ -40,6 +43,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     demo: { x: 0.82, y: 0.36, w: 0.20, h: 0.10 },
     code: { x: 0.02, y: 0.53, w: 0.21, h: 0.11 },
     cat: { x: 0.58, y: 0.49, w: 0.13, h: 0.05 },
+    adventure: { x: 0.05, y: 0.08, w: 0.42, h: 0.11 },
   };
 
   constructor(private router: Router) {}
@@ -58,7 +62,6 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
   checkScreenSize(): void {
     const width = window.innerWidth;
     this.isMobile = width <= 768;
-    console.log('isMobile:', this.isMobile, 'width:', width);
   }
 
   ngAfterViewInit(): void {
@@ -117,8 +120,8 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
       this.positionHotspot('.hotspot-demo', coords.demo, visibleWidth, visibleHeight, offsetX, offsetY);
       this.positionHotspot('.hotspot-code', coords.code, visibleWidth, visibleHeight, offsetX, offsetY);
       this.positionHotspot('.hotspot-cat', coords.cat, visibleWidth, visibleHeight, offsetX, offsetY);
+      this.positionHotspot('.hotspot-adventure', coords.adventure, visibleWidth, visibleHeight, offsetX, offsetY);
 
-      console.log('Hotspots reposicionados:', { visibleWidth, visibleHeight, offsetX, offsetY });
     };
 
     // Si la imagen ya está cacheada, forzar onload
@@ -145,7 +148,6 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
   get backgroundStyle() {
     const imageUrl = this.isMobile ? 'assets/images/room2.png' : 'assets/images/room.png';
     const bgSize = this.isMobile ? 'contain' : 'cover';
-    console.log('Background URL:', imageUrl);
     return {
       'background-image': `url(${imageUrl})`,
       'background-size': bgSize,
@@ -179,6 +181,9 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     
     this.catSound = new Audio('assets/sound/cat-sound.mp3');
     this.catSound.volume = 0.7;
+    
+    this.indianaJonesSound = new Audio('assets/sound/indiana-jones-theme.mp3');
+    this.indianaJonesSound.volume = 0.6;
     
     // Debug: Agregar clase para visualización temporal
     if (typeof window !== 'undefined' && window.location.search.includes('debug')) {
@@ -216,7 +221,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
       this.dialogText = '';
       if (projectId === 'terminal') this.router.navigate(['/contact']); // terminal → contacto
       else if (projectId === 'tentaculo') this.router.navigate(['/projects/tentaculo']); // mutante → proyecto
-    }, 2500);
+    }, 5000);
   }
 
   goToContact() {
@@ -236,7 +241,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
       this.router.navigate(['/contact']);
-    }, 2000);
+    }, 5000);
   }
 
   goToAbout() {
@@ -253,7 +258,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
       this.router.navigate(['/about']);
-    }, 2000)
+    }, 5000)
   }
 
   goToCv() {
@@ -270,7 +275,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
       this.router.navigate(['/cv']);
-    }, 2000)  
+    }, 5000)  
   }
 
   goToDemo() {
@@ -287,7 +292,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
       this.router.navigate(['/demo']);
-    }, 2000)
+    }, 5000)
   } 
 
   goToCode() {
@@ -301,7 +306,7 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.dialogText = '';
        window.open('https://github.com/Vithley', '_blank');
-    }, 2000)
+    }, 5000)
   }
 
   goToCat() {
@@ -321,7 +326,41 @@ export class AdventureComponent implements OnDestroy, AfterViewInit {
     // después de delay, limpia el mensaje
     setTimeout(() => {
       this.dialogText = '';
-    }, 2000);
+    }, 5000);
+  }
+
+  goToAdventure() {
+    if (this.backgroundMusic) {
+      this.backgroundMusic.pause();
+    }
+    
+    // Intentar reproducir el sonido de Indiana Jones
+    this.indianaJonesSound.currentTime = 0;
+    const playPromise = this.indianaJonesSound.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        console.error('Error al reproducir música de Indiana Jones:', error);
+      });
+    }
+
+    // animación glow
+    const hotspot = document.querySelector('.hotspot-adventure .glow-overlay');
+    hotspot?.classList.add('clicked');
+    setTimeout(() => hotspot?.classList.remove('clicked'), 500);
+
+    // mensaje narrador tipo aventura gráfica
+    this.dialogText = '🏆 [Narrador]: ¡El trofeo de las aventuras épicas! ¡Que suene la música!';
+
+    // después de delay, reanudar música de fondo
+    setTimeout(() => {
+      this.dialogText = '';
+      if (this.backgroundMusic) {
+        this.backgroundMusic.play().catch((error) => {
+          console.warn('Error al reanudar música de fondo:', error);
+        });
+      }
+    }, 8000); // 8 segundos para que suene un poco la música
   } 
 
 
